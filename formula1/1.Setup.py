@@ -3,7 +3,7 @@ dbutils.secrets.listScopes()
 
 # COMMAND ----------
 
-storage_account_name = "abhijitstorageaccount32"
+storage_account_name = "abhijitdatalake"
 client_id = dbutils.secrets.get(scope="formula1-secret-scope", key="databricks-client-id")
 tenant_id = dbutils.secrets.get(scope="formula1-secret-scope", key="databricks-tenant-id")
 secret = dbutils.secrets.get(scope="formula1-secret-scope", key="databricks-secret")
@@ -38,11 +38,11 @@ dbutils.fs.mounts()
 
 # COMMAND ----------
 
-dbutils.fs.ls("/mnt/abhijitstorageaccount32/raw")
+dbutils.fs.ls("/mnt/abhijitdatalake/raw")
 
 # COMMAND ----------
 
-dbutils.fs.ls("/mnt/abhijitstorageaccount32/processed")
+dbutils.fs.ls("/mnt/abhijitdatalake/processed")
 
 # COMMAND ----------
 
