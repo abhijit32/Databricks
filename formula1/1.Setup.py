@@ -3,7 +3,7 @@ dbutils.secrets.listScopes()
 
 # COMMAND ----------
 
-storage_account_name = "abhijitdatalake"
+storage_account_name = dbutils.secrets.get(scope="formula1-secret-scope", key="databricks-storage-account-name")
 client_id = dbutils.secrets.get(scope="formula1-secret-scope", key="databricks-client-id")
 tenant_id = dbutils.secrets.get(scope="formula1-secret-scope", key="databricks-tenant-id")
 secret = dbutils.secrets.get(scope="formula1-secret-scope", key="databricks-secret")
@@ -21,7 +21,7 @@ configs = {"fs.azure.account.auth.type": "OAuth",
 container_name = "raw" 
 dbutils.fs.mount(
   source = f"abfss://{container_name}@{storage_account_name}.dfs.core.windows.net/",
-  mount_point = f"/mnt/{storage_account_name}/{container_name}",
+  mount_point = f"/mnt/{container_name}",
   extra_configs = configs)
 
 # COMMAND ----------
@@ -29,7 +29,7 @@ dbutils.fs.mount(
 container_name = "processed" 
 dbutils.fs.mount(
   source = f"abfss://{container_name}@{storage_account_name}.dfs.core.windows.net/",
-  mount_point = f"/mnt/{storage_account_name}/{container_name}",
+  mount_point = f"/mnt/{container_name}",
   extra_configs = configs)
 
 # COMMAND ----------
@@ -38,11 +38,11 @@ dbutils.fs.mounts()
 
 # COMMAND ----------
 
-dbutils.fs.ls("/mnt/abhijitdatalake/raw")
+dbutils.fs.ls("/mnt/raw")
 
 # COMMAND ----------
 
-dbutils.fs.ls("/mnt/abhijitdatalake/processed")
+dbutils.fs.ls("/mnt/processed")
 
 # COMMAND ----------
 
