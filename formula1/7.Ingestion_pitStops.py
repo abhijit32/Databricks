@@ -30,4 +30,8 @@ pitStops_final_df.write.mode('overwrite').parquet('mnt/processed/pit_stops')
 
 # COMMAND ----------
 
+dbutils.notebook.exit(f'success run {dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get()}')
+
+# COMMAND ----------
+
 

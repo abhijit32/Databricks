@@ -83,4 +83,8 @@ display(spark.read.parquet('/mnt/processed/circuits'))
 
 # COMMAND ----------
 
+dbutils.notebook.exit(f'success run {dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get()}')
+
+# COMMAND ----------
+
 

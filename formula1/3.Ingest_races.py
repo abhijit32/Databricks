@@ -59,4 +59,8 @@ race_final_df.write.mode('overwrite').partitionBy('race_year').parquet('/mnt/pro
 
 # COMMAND ----------
 
+dbutils.notebook.exit(f'success run {dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get()}')
+
+# COMMAND ----------
+
 

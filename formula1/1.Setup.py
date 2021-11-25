@@ -46,4 +46,8 @@ dbutils.fs.ls("/mnt/processed")
 
 # COMMAND ----------
 
+dbutils.notebook.exit(f'success run {dbutils.notebook.entry_point.getDbutils().notebook().getContext().notebookPath().get()}')
+
+# COMMAND ----------
+
 
