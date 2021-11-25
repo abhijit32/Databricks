@@ -1,4 +1,13 @@
 # Databricks notebook source
+dbutils.widgets.help()
+
+# COMMAND ----------
+
+dbutils.widgets.text('data_source',"")
+v_data_source = dbutils.widgets.get('data_source')
+
+# COMMAND ----------
+
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DoubleType
 from pyspark.sql.functions import col, current_timestamp,lit
 
