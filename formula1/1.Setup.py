@@ -34,6 +34,14 @@ dbutils.fs.mount(
 
 # COMMAND ----------
 
+container_name = "transformation" 
+dbutils.fs.mount(
+  source = f"abfss://{container_name}@{storage_account_name}.dfs.core.windows.net/",
+  mount_point = f"/mnt/{container_name}",
+  extra_configs = configs)
+
+# COMMAND ----------
+
 dbutils.fs.mounts()
 
 # COMMAND ----------
