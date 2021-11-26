@@ -1,6 +1,7 @@
 # Databricks notebook source
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType, DoubleType, DateType
-from pyspark.sql.functions import col, current_timestamp,lit, to_timestamp, concat, desc
+from pyspark.sql.functions import col, current_timestamp,lit, to_timestamp, concat, desc, sum, count, rank
+from pyspark.sql.window import Window 
 
 # COMMAND ----------
 
@@ -36,6 +37,27 @@ display(results_final_df)
 # COMMAND ----------
 
 results_final_df.write.mode('overwrite').parquet('/mnt/transformation/points')
+
+# COMMAND ----------
+
+rs = results_final_df.groupBy('race_year','name','team').agg(sum('points').alias('total_points'))
+
+# COMMAND ----------
+
+display(rs)
+
+# COMMAND ----------
+
+window_schema = Window.partitionBy('race_year').orderBy(desc('total_points'))
+final_df = rs.withColumn('rank', rank().over(window_schema))
+
+# COMMAND ----------
+
+display(final_df.filter('race_year >= 2010'))
+
+# COMMAND ----------
+
+final_df.write.mode('overwrite').partitionBy('race_year').parquet('/mnt/transformation/driver_standings')
 
 # COMMAND ----------
 
